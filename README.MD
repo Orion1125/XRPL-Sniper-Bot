@@ -9,12 +9,15 @@ It scans for newly deployed tokens with a marketcap of below $1k and and places 
 
 - make sure you have Node and NPM installed.
 
-- run
-    npm install dotenv xrpl 
+```bash
+   npm install dotenv xrpl
+```
   to install dependencies needed.
 
 - run
-    node xrpl.js
+```bash
+   node xrpl.js
+```
   to start the bot.
 
 Please use at your own risk, this product might incur losses if not used correctly.
