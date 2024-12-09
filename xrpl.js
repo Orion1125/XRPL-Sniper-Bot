@@ -103,7 +103,7 @@ async function processToken(client, wallet, issuer, currency) {
 
   const liquidity = await getTokenLiquidity(client, issuer, currency);
   if (liquidity <= 0) {
-    console.log(Token ${currency} has unsafe liquidity. Skipping...);
+    console.log('Token ${currency} has unsafe liquidity. Skipping...');
     return;
   }
 
