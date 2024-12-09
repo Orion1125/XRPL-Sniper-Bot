@@ -50,7 +50,7 @@ async function getTokenLiquidity(client, issuer, currency) {
   if (creatorControl) return 0;
 
   console.log(
-    Total accessible liquidity for token ${currency}: ${totalLiquidity}
+    'Total accessible liquidity for token ${currency}: ${totalLiquidity}'
   );
   return totalLiquidity;
 }
@@ -89,11 +89,11 @@ async function snipeToken(client, wallet, issuer, currency) {
   const signedTx = wallet.sign(preparedTx);
   const result = await client.submitAndWait(signedTx.tx_blob);
 
-  console.log(Sniped token ${currency} successfully! Transaction: ${result.result.hash});
+  console.log('Sniped token ${currency} successfully! Transaction: ${result.result.hash}');
 }
 
 async function processToken(client, wallet, issuer, currency) {
-  console.log(Processing token: ${currency} issued by ${issuer});
+  console.log('Processing token: ${currency} issued by ${issuer}');
 
   const blackholed = await isBlackholed(client, issuer);
   if (!blackholed) {
@@ -109,7 +109,7 @@ async function processToken(client, wallet, issuer, currency) {
 
   const marketCap = await getMarketCap(client, issuer, currency);
   if (marketCap >= MARKET_CAP_THRESHOLD) {
-    console.log(Token ${currency} exceeds market cap threshold. Skipping...);
+    console.log('Token ${currency} exceeds market cap threshold. Skipping...');
     return;
   }
 
