@@ -41,7 +41,7 @@ async function getTokenLiquidity(client, issuer, currency) {
 
     if (offer.Account === issuer) {
       console.log(
-        Issuer ${issuer} has direct control of liquidity in the pool. Skipping token ${currency}.
+        'Issuer ${issuer} has direct control of liquidity in the pool. Skipping token ${currency}.'
       );
       creatorControl = true;
     }
