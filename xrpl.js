@@ -41,7 +41,7 @@ async function getTokenLiquidity(client, issuer, currency) {
 
     if (offer.Account === issuer) {
       console.log(
-        'Issuer ${issuer} has direct control of liquidity in the pool. Skipping token ${currency}.'
+        `Issuer ${issuer} has direct control of liquidity in the pool. Skipping token ${currency}.`
       );
       creatorControl = true;
     }
@@ -50,7 +50,7 @@ async function getTokenLiquidity(client, issuer, currency) {
   if (creatorControl) return 0;
 
   console.log(
-    'Total accessible liquidity for token ${currency}: ${totalLiquidity}'
+    `Total accessible liquidity for token ${currency}: ${totalLiquidity}`
   );
   return totalLiquidity;
 }
@@ -89,27 +89,27 @@ async function snipeToken(client, wallet, issuer, currency) {
   const signedTx = wallet.sign(preparedTx);
   const result = await client.submitAndWait(signedTx.tx_blob);
 
-  console.log('Sniped token ${currency} successfully! Transaction: ${result.result.hash}');
+  console.log(`Sniped token ${currency} successfully! Transaction: ${result.result.hash}`);
 }
 
 async function processToken(client, wallet, issuer, currency) {
-  console.log('Processing token: ${currency} issued by ${issuer}');
+  console.log(`Processing token: ${currency} issued by ${issuer}`);
 
   const blackholed = await isBlackholed(client, issuer);
   if (!blackholed) {
-    console.log(Token ${currency} is not blackholed. Skipping...);
+    console.log(`Token ${currency} is not blackholed. Skipping...`);
     return;
   }
 
   const liquidity = await getTokenLiquidity(client, issuer, currency);
   if (liquidity <= 0) {
-    console.log('Token ${currency} has unsafe liquidity. Skipping...');
+    console.log(`Token ${currency} has unsafe liquidity. Skipping...`);
     return;
   }
 
   const marketCap = await getMarketCap(client, issuer, currency);
   if (marketCap >= MARKET_CAP_THRESHOLD) {
-    console.log('Token ${currency} exceeds market cap threshold. Skipping...');
+    console.log(`Token ${currency} exceeds market cap threshold. Skipping...`);
     return;
   }
 
@@ -141,7 +141,7 @@ async function scanNewTokens(client, wallet) {
 
   const wallet = xrpl.Wallet.fromSeed(PRIVATE_KEY);
 
-  console.log("Bot connected. Scanning for new tokens...");
+  console.log(`Bot connected. Scanning for new tokens...`);
 
   setInterval(async () => {
     try {
